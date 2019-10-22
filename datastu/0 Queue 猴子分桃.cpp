@@ -74,8 +74,9 @@ void peach(int n,int k,int m){
         px = px + pc;
         
         if(px + p >= m){
-            p = m;
             px = px - (m - p);
+            p = m;
+           
         }
         else
         {
@@ -99,6 +100,6 @@ void peach(int n,int k,int m){
 
 int main(){
     int n = 5, k = 3, m = 40; //猴，筐，桃
-    peach(n, m, k);
+    peach(n, k ,m);
     system("pause");
 }
