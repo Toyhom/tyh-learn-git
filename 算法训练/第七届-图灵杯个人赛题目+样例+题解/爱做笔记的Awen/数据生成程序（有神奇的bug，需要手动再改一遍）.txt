@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    freopen("out.txt","w",stdout);
+    unsigned seed;
+    seed = time(0);
+    srand(seed);
+    int n=100,op,num,ans=0,cpy;
+    char c;
+    cout<<n<<endl;
+    while(n--) {
+        op=rand()%4;
+        if(op==0) {
+            num=rand()%100+1;
+            if(ans+num>=1e5) {
+                n++;
+                continue;
+            }
+            ans+=num;
+            cout<<"Add "<<num<<" ";
+            while(num--) {
+                c='a'+rand()%26;
+                cout<<c;
+            }
+            cout<<endl;
+        } else if(op==1) {
+            if(ans==0) {
+                n++;
+                continue;
+            }
+            num=rand()%ans+1;
+            cout<<"Del "<<num<<endl;
+            ans-=num;
+        } else if(op==2) {
+            cout<<"Copy"<<endl;
+            cpy=ans;
+        } else if(op==3) {
+            if(ans+cpy>=1e5) {
+                n++;
+                continue;
+            }
+            cout<<"Paste"<<endl;
+            ans+=cpy;
+        }
+        //cout<<n<<endl;
+    }
+    return 0;
+}

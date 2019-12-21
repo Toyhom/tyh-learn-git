@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+char Map[200][200];
+int ans1,ans2,n,m;
+int nxt[4][2]={0,1,0,-1,1,0,-1,0};
+bool vis[200][200];
+struct node{
+    int x,y,step;
+};
+
+bool check(node a){
+    if(a.x<0||a.x>=n||a.y<0||a.y>=m)
+        return false;
+    if(Map[a.x][a.y]=='*'||vis[a.x][a.y]==1)
+        return false;
+    return true;
+}
+
+void bfs(int x,int y){
+    node start={x,y,0};
+    queue<node> q;
+    q.push(start);
+    vis[x][y]=1;
+    int flag=0;
+    while(!q.empty()){
+        node temp=q.front();
+        q.pop();
+        if(Map[temp.x][temp.y]=='z'){
+            ans1=temp.step*2;
+            flag++;
+        }else if(Map[temp.x][temp.y]=='x'){
+            ans2=temp.step*2;
+            flag++;
+        }
+        if(flag==2)
+            return;
+        for(int i=0;i<4;i++){
+            node New=temp;
+            New.step++;
+            New.x+=nxt[i][0],New.y+=nxt[i][1];
+            if(check(New)){
+                vis[New.x][New.y]=1;
+                q.push(New);
+            }
+        }
+    }
+}
+
+int main()
+{
+    int x,y,a;
+    cin>>n>>m;
+    ans1=ans2=1e9;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>Map[i][j];
+            if(Map[i][j]=='s')
+                x=i,y=j;
+        }
+    }
+    cin>>a;
+    bfs(x,y);
+    ans2+=a;
+    if(ans1<ans2){
+        cout<<"wo tu le";
+    }else if(ans1>ans2){
+        cout<<"ying ying ying";
+    }else{
+        cout<<"awennb";
+    }
+    return 0;
+}

@@ -1,0 +1,27 @@
+include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int n,m;
+    string ans="",op,cpy,temp;
+    cin>>n;
+    while(n--){
+        cin>>op;
+        if(op=="Add"){
+            cin>>m;
+            cin>>temp;
+            ans+=temp;
+        }else if(op=="Del"){
+            cin>>m;
+            ans=ans.substr(0,ans.size()-m);
+        }else if(op=="Copy"){
+            cpy=ans;
+        }else if(op=="Paste"){
+            ans+=cpy;
+        }
+    }
+    cout<<ans;
+    return 0;
+}
